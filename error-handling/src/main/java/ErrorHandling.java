@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Optional;
 
 class ErrorHandling {
@@ -12,40 +13,49 @@ class ErrorHandling {
         throw new IllegalArgumentException(message);
     }
 
-    void handleErrorByThrowingAnyCheckedException() {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingAnyCheckedException() throws FileNotFoundException {
+        throw new FileNotFoundException();
     }
 
-    void handleErrorByThrowingAnyCheckedExceptionWithDetailMessage(String message) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingAnyCheckedExceptionWithDetailMessage(String message) throws  FileNotFoundException{
+        throw new FileNotFoundException(message);
     }
 
     void handleErrorByThrowingAnyUncheckedException() {
-        // Delete this statement and write your own implementation.
+        throw new ArithmeticException();
     }
 
     void handleErrorByThrowingAnyUncheckedExceptionWithDetailMessage(String message) {
-        // Delete this statement and write your own implementation.
+        throw new ArithmeticException(message);
     }
 
-    void handleErrorByThrowingCustomCheckedException() {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingCustomCheckedException() throws CustomCheckedException {
+        throw new CustomCheckedException();
     }
 
-    void handleErrorByThrowingCustomCheckedExceptionWithDetailMessage(String message) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+    void handleErrorByThrowingCustomCheckedExceptionWithDetailMessage(String message) throws CustomCheckedException {
+        throw new CustomCheckedException(message);
     }
 
     void handleErrorByThrowingCustomUncheckedException() {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+        throw new CustomUncheckedException();
     }
 
     void handleErrorByThrowingCustomUncheckedExceptionWithDetailMessage(String message) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+        throw new CustomUncheckedException(message);
     }
 
     Optional<Integer> handleErrorByReturningOptionalInstance(String integer) {
-        throw new UnsupportedOperationException("Delete this statement and write your own implementation.");
+        Optional<Integer> optionalResult = null;
+        Integer result = null;
+        try {
+            result = Integer.valueOf(integer);
+            optionalResult = Optional.ofNullable(result);
+        }catch (NumberFormatException exception) {
+            optionalResult = Optional.empty();
+        }
+
+        return optionalResult;
     }
 
 }
